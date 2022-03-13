@@ -19,7 +19,7 @@ import AppContext from './context/AppContext';
 import ThemeContext from './context/themeContext';
 import contract from './utils/contract.json';
 
-const CONTRACT_ADDRESS = '0xD61fdFdfD230ABc4a3619AAf38B6Bb8D4aa4296E';
+const CONTRACT_ADDRESS = '0x7992D9C75aBf9d0a7823d18f8c2A6346aAAD5d30';
 
 let providerOptions = {
   walletconnect: {
@@ -164,6 +164,15 @@ function App() {
         `Hey there! We've minted your NFT and sent it to your wallet. It may be blank right now. It can take a max of 10 min to show up on OpenSea. Here's the link: https://testnets.opensea.io/assets/mumbai/${CONTRACT_ADDRESS}/${tokenId.toNumber()}`
       );
       setIsMember(true);
+    });
+    connectedContract.on('Publish', level => {
+      fetchAccountDetails();
+      getAllUsers();
+      console.log('NEW LEVEL', level);
+    });
+    connectedContract.on('SetName', name => {
+      fetchAccountDetails();
+      console.log('SET NAME TO', name);
     });
     // Same stuff again
     console.log('Setup event listener!');
