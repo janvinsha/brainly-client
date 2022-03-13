@@ -22,6 +22,7 @@ export default function DashBoard({}) {
     accountDetails,
     changingName,
     changeName,
+    isMember,
   } = useContext(AppContext);
   const { theme, changeTheme } = useContext(ThemeContext);
   const scores = [
@@ -100,47 +101,47 @@ export default function DashBoard({}) {
     >
       <Minting visible={publishing || changingName} />
       <div className="box">
-        {currentAccount && (
-          <span className="title">
-            Current High Score: Level{' '}
-            {JSON.parse(localStorage.getItem('userLevel'))}
-          </span>
-        )}
-        {currentAccount && (
-          <span className="title">
-            Last Published High Score: Level {accountDetails?.level}
-          </span>
-        )}
-        {currentAccount && (
-          <span className="title">
-            Name: {accountDetails?.name || 'User'}{' '}
-            <button onClick={() => setEditOn(!editOn)}>
-              <EditIcon />
-            </button>
-          </span>
-        )}
-        {currentAccount && editOn && (
-          <span className="edit">
-            <input
-              onChange={e => setName(e.target.value)}
-              placeholder="Set Name"
-            />
+        {currentAccount && isMember && (
+          <>
+            <span className="title">
+              Current High Score: Level{' '}
+              {JSON.parse(localStorage.getItem('userLevel'))}
+            </span>
 
-            <button onClick={() => changeName(name)}>
-              <SendIcon />
-            </button>
-          </span>
-        )}
-        {currentAccount && (
-          <span className="publish">
-            <button
-              onClick={() =>
-                publishScore(JSON.parse(localStorage.getItem('userLevel')))
-              }
-            >
-              Add High Score to Score Board
-            </button>
-          </span>
+            <span className="title">
+              Last Published High Score: Level {accountDetails?.level}
+            </span>
+
+            <span className="title">
+              Name: {accountDetails?.name || 'User'}{' '}
+              <button onClick={() => setEditOn(!editOn)}>
+                <EditIcon />
+              </button>
+            </span>
+
+            {editOn && (
+              <span className="edit">
+                <input
+                  onChange={e => setName(e.target.value)}
+                  placeholder="Set Name"
+                />
+
+                <button onClick={() => changeName(name)}>
+                  <SendIcon />
+                </button>
+              </span>
+            )}
+
+            <span className="publish">
+              <button
+                onClick={() =>
+                  publishScore(JSON.parse(localStorage.getItem('userLevel')))
+                }
+              >
+                Add High Score to Score Board
+              </button>
+            </span>
+          </>
         )}
       </div>
       <div className="score-board">

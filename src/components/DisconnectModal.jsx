@@ -23,7 +23,9 @@ const DisconnectModal = ({ show, onClose, disconnect, account }) => {
       modalStyle={{ height: 'auto' }}
     >
       <StyledDisconnectModal theme_={theme}>
-        <span>Connected Address: {account}</span>
+        <span>
+          Connected Address: {account?.slice(0, 4)}...{account?.slice(-4)}
+        </span>
         <button onClick={close}>Disconnect</button>
       </StyledDisconnectModal>
     </Modal>

@@ -96,6 +96,7 @@ function App() {
 
         setCurrentAccount(account);
         fetchAccountDetails(account);
+        getAllUsers();
         console.log('Going to pop wallet now to pay gas...');
         let chainId = await signer.getChainId();
         if (chainId == 80001) {
@@ -143,6 +144,7 @@ function App() {
       fetchAccountDetails(accounts[0]);
       setupEventListener();
       checkIfWalletIsConnected();
+      getAllUsers();
       localStorage.setItem(
         'userLevel',
         JSON.stringify(accountDetails?.level || 1)
@@ -331,7 +333,6 @@ function App() {
   useEffect(() => {
     checkIfWalletIsConnected();
     console.log('E dey here oo', web3Modal.cachedProvider);
-    getAllUsers();
   }, []);
 
   return (
