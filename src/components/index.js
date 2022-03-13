@@ -1,5 +1,6 @@
 export { default as SettingsModal } from './SettingsModal';
 export { default as AboutModal } from './AboutModal';
+export { default as DisconnectModal } from './DisconnectModal';
 export { default as Modal } from './Modal';
 export { default as Footer } from './Footer';
 export { default as GlobalStyle } from './GlobalStyle';

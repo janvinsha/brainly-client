@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-import { AboutModal, SettingsModal } from './index';
+import { AboutModal, SettingsModal, DisconnectModal } from './index';
 import AppContext from '../context/AppContext';
 import SettingsIcon from '@mui/icons-material/Settings';
 import InfoIcon from '@mui/icons-material/Info';
@@ -14,11 +14,13 @@ import { useNavigate } from 'react-router-dom';
 const Nav = () => {
   const navigate = useNavigate();
   const [showSettings, setShowSettings] = useState(false);
+  const [showDisconnect, setShowDisconnect] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
   const {
     currentAccount,
 
     connectWallet,
+    disconnectWeb3Modal,
   } = useContext(AppContext);
   const { theme, changeTheme } = useContext(ThemeContext);
   const handlerThemeSwitch = () => {
@@ -46,7 +48,7 @@ const Nav = () => {
             </span>
           ) : (
             <span className="account">
-              <button>
+              <button onClick={() => setShowDisconnect(true)}>
                 <span>
                   {currentAccount.slice(0, 4)}...{currentAccount.slice(-4)}
                 </span>
@@ -65,6 +67,12 @@ const Nav = () => {
         show={showAbout}
         onClose={() => setShowAbout(false)}
         changeTheme={changeTheme}
+      />
+      <DisconnectModal
+        show={showDisconnect}
+        onClose={() => setShowDisconnect(false)}
+        disconnect={disconnectWeb3Modal}
+        account={currentAccount}
       />
     </StyledNav>
   );

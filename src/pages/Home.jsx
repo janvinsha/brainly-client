@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useMemo } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { Loader, Minting } from '../components';
@@ -10,6 +10,8 @@ import blue from '../assets/sounds/blue.mp3';
 import green from '../assets/sounds/green.mp3';
 import yellow from '../assets/sounds/yellow.mp3';
 import wrong from '../assets/sounds/wrong.mp3';
+
+import { pageAnimation } from '../animation';
 export default function Home() {
   const {
     connectWallet,
@@ -40,45 +42,11 @@ export default function Home() {
   let level = JSON.parse(localStorage.getItem('level') || 0);
 
   // useEffect(() => {
-  //   alert('Wrong');
-  //   setUserClickedPattern(
-  //     JSON.parse(localStorage.getItem('userClickedPattern'))
-  //   );
-  //   setGamePattern(JSON.parse(localStorage.getItem('gamePattern')));
-  // }, [setUserClickedPattern, setGamePattern]);
-
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 7400);
-  }, []);
-  // useEffect(() => {
-  //   alert('storage updated');
-  //   let {
-  //     level: l,
-  //     finalLevel: fl,
-  //     gamePattern: gp,
-  //     userClickedPattern: up,
-  //     started: s,
-  //   } = storage.retrieveData();
-  //   storage.storeData({
-  //     finalLevel: fl,
-  //     level: l,
-  //     gamePattern: gp,
-  //     userClickedPattern: up || [],
-  //     started: s || false,
-  //   });
-  // }, [
-  //   level,
-  //   gamePattern,
-  //   userClickedPattern,
-  //   started,
-  //   setLevel,
-  //   setGamePattern,
-  //   setUserClickedPattern,
-  //   setStarted,
-  // ]);
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 7400);
+  // }, []);
 
   useEffect(() => {
     setTimeout(() => {
@@ -218,7 +186,12 @@ export default function Home() {
     started = false;
   }
   return (
-    <StyledHome>
+    <StyledHome
+      exit="exit"
+      variants={pageAnimation}
+      initial="hidden"
+      animate="show"
+    >
       <Loader visible={loading} />
       <Minting visible={minting} />
       {currentAccount && isMember && (
@@ -283,6 +256,7 @@ const StyledHome = styled(motion.div)`
   align-items: center;
   padding: 1rem 1rem;
   gap: 1.4rem;
+
   .publish {
     background: -webkit-linear-gradient(green, yellow);
     -webkit-background-clip: text;
