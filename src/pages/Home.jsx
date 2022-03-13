@@ -41,12 +41,12 @@ export default function Home() {
 
   let level = JSON.parse(localStorage.getItem('level') || 0);
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 7400);
-  // }, []);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 7400);
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
