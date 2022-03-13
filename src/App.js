@@ -173,6 +173,7 @@ function App() {
     connectedContract.on('SetName', name => {
       fetchAccountDetails();
       checkIfWalletIsConnected();
+      getAllUsers();
       console.log('SET NAME TO', name);
     });
     // Same stuff again
