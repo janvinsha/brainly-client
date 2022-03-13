@@ -143,6 +143,10 @@ function App() {
       fetchAccountDetails(accounts[0]);
       setupEventListener();
       checkIfWalletIsConnected();
+      localStorage.setItem(
+        'userLevel',
+        JSON.stringify(accountDetails?.level || 1)
+      );
     } catch (error) {
       console.log(error);
     }
