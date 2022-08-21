@@ -5,7 +5,8 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
 import { sequence } from '0xsequence';
-
+import * as UAuthWeb3Modal from '@uauth/web3modal';
+import UAuthSPA from '@uauth/js';
 // NOTE: here we use a forked package of web3modal, named @0xsequence/web3modal
 // Once the web3modal PR https://github.com/Web3Modal/web3modal/pull/402 is merged,
 // then you can just import from 'web3modal' directly without any other changes.
@@ -21,7 +22,22 @@ import contract from './utils/contract.json';
 
 const CONTRACT_ADDRESS = '0x7992D9C75aBf9d0a7823d18f8c2A6346aAAD5d30';
 
+const uauthOptions = {
+  clientID: 'f1c5fe12-edb6-47c7-899e-d8efd1dd6c4f',
+  redirectUri: 'https://brainly-game.netlify.app',
+  scope: 'openid wallet',
+};
+
 let providerOptions = {
+  'custom-uauth': {
+    display: UAuthWeb3Modal.display,
+
+    connector: UAuthWeb3Modal?.connector,
+
+    package: UAuthSPA,
+
+    options: uauthOptions,
+  },
   walletconnect: {
     package: WalletConnect,
     options: {
@@ -49,7 +65,7 @@ const web3Modal = new Web3Modal({
   cacheProvider: true,
   theme: `light`,
 });
-
+UAuthWeb3Modal?.registerWeb3Modal(web3Modal);
 function App() {
   const [color, setColor] = useState(false);
   const [sound, setSound] = useState(JSON.parse(localStorage.getItem('sound')));
