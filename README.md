@@ -66,3 +66,29 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+## Unstoppable Domains Hackathon
+
+### Project Name
+
+Brainly
+
+### Recorded video demo of the integration (max. 3 mins)
+
+https://drive.google.com/file/d/1-ifCx1k6oNQCDCu3lf6RjGokQt-2vFbG/view?usp=sharing
+
+### Live URL with working integration
+
+https://brainly-game.netlify.app/
+
+### Person of contact in case there are any questions
+
+Jande Vincent janvinsha@gmail.com
+
+### Discord ID
+
+Janvinsha#6873
+
+### UnstoppableDomain registered account email address
+
+janvinsha@gmail.com
